@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design and Development - Red/Black</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top right, #2a0000, #0a0a0a, #000000);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            transition: background 0.3s ease;
+        }
+
+        .main-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            transition: max-width 0.4s ease;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 42px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            transition: font-size 0.3s ease;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            transition: grid-template-columns 0.4s ease;
+        }
+
+        .card {
+            background-color: #151515;
+            border: 1px solid #333;
+            border-top: 4px solid #e50914;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.2);
+        }
+
+        .card-number {
+            color: #e50914;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+            transition: font-size 0.3s ease;
+        }
+
+        .card-text {
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #e50914;
+            border-radius: 5px;
+            align-self: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .card-link:hover {
+            background-color: #ff2a34;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #e50914;
+            color: #fff;
+            border: 2px solid #ff4d4d;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toggle-btn:hover {
+            background-color: #ff2a34;
+            transform: scale(1.05);
+        }
+
+        body.mobile-mode {
+            align-items: flex-start;
+            padding-top: 80px;
+        }
+
+        body.mobile-mode .main-wrapper {
+            max-width: 480px;
+        }
+
+        body.mobile-mode .header h1 {
+            font-size: 28px;
+        }
+
+        body.mobile-mode .grid-container {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        body.mobile-mode .card {
+            padding: 30px 20px;
+        }
+
+        body.mobile-mode .card-number {
+            font-size: 36px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header h1 {
+                font-size: 34px;
+            }
+            .toggle-btn {
+                display: none; 
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="toggleBtn" class="toggle-btn">
+        📱 Мобильная версия
+    </button>
+
+    <div class="main-wrapper" id="mainWrapper">
+        <header class="header">
+            <h1>Design and Development</h1>
+        </header>
+
+        <main class="grid-container">
+            <div class="card">
+                <div class="card-number">01</div>
+                <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <a href="#" class="card-link">Learn More</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">02</div>
+                <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <a href="#" class="card-link">Learn More</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">03</div>
+                <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <a href="#" class="card-link">Learn More</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">04</div>
+                <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <a href="#" class="card-link">Learn More</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">05</div>
+                <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <a href="#" class="card-link">Learn More</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">06</div>
+                <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <a href="#" class="card-link">Learn More</a>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            Image by Freepik
+        </footer>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const body = document.body;
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('mobile-mode');
+            
+            if (body.classList.contains('mobile-mode')) {
+                toggleBtn.innerHTML = '💻 Версия для ПК';
+            } else {
+                toggleBtn.innerHTML = '📱 Мобильная версия';
+            }
+        });
+    </script>
+</body>
+</html>
